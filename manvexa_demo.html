@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17152f">
+<title>MANVEXA — Connect People. Create Change.</title>
+<style>
+:root{--bg:#f5f4fb;--ink:#211d36;--muted:#77728b;--brand:#6654d9;--brand2:#9a65e8;--card:#fff;--line:#e9e6f2}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:linear-gradient(130deg,#17152f,#43348c 65%,#7854c8);color:white;padding:25px 18px 28px;border-radius:0 0 25px 25px}
+.brand{font-size:28px;font-weight:850;letter-spacing:2px}.tag{opacity:.88;font-size:13px;margin-top:3px}
+.wrap{max-width:720px;margin:auto;padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 5px 18px #29204b0a}
+h2{font-size:18px;margin:0 0 12px}p{line-height:1.5}.muted{color:var(--muted);font-size:13px}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;margin:6px 0 12px;background:#fff;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}button{border:0;border-radius:12px;padding:12px 16px;background:var(--brand);color:white;font-weight:700;font-size:15px;cursor:pointer}
+button.secondary{background:#eeeafd;color:#45369e}button:disabled{opacity:.5}
+.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.row button{flex:1}
+.pill{display:inline-block;background:#f0edff;color:#5141b4;padding:6px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.post{border-top:1px solid var(--line);padding:13px 0}.post:first-child{border-top:0}.post strong{display:block;margin-bottom:4px}
+nav{display:flex;gap:8px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2}
+nav button{flex:1;padding:10px 5px;font-size:13px}.hidden{display:none!important}
+footer{text-align:center;padding:20px;color:var(--muted);font-size:12px}
+.notice{background:#fff8e7;border:1px solid #f4dfaa;padding:11px;border-radius:12px;font-size:13px;color:#6c5316}
+</style>
+</head>
+<body>
+<header><div class="brand">MANVEXA</div><div class="tag">Connect People. Create Change.</div></header>
+<main class="wrap">
+  <section id="welcome" class="card">
+    <h2>MANVEXA में आपका स्वागत है 👋</h2>
+    <p class="muted">अपनी प्रोफाइल बनाएँ और ऐसी कम्युनिटी चुनें जहाँ आप सीखें, जुड़ें और आगे बढ़ें।</p>
+    <label for="name">आपका नाम</label><input id="name" maxlength="35" placeholder="अपना नाम लिखें">
+    <label for="community">आप किस कम्युनिटी से जुड़ना चाहते हैं?</label>
+    <select id="community"><option value="Positive Community">Positive Community — अच्छे विचार और मदद</option><option value="Growth Community">Growth Community — बदलाव और नई शुरुआत</option></select>
+    <button id="join">MANVEXA से जुड़ें</button>
+  </section>
+  <section id="app" class="hidden">
+    <nav><button data-tab="feed">होम</button><button data-tab="create">पोस्ट लिखें</button><button data-tab="profile">मेरी प्रोफाइल</button></nav>
+    <section id="feed" class="card"><h2>कम्युनिटी फीड</h2><p class="muted">सकारात्मक, सम्मानजनक और उपयोगी बातें साझा करें।</p><div id="posts"></div></section>
+    <section id="create" class="card hidden"><h2>नई पोस्ट बनाएँ</h2><textarea id="postText" maxlength="500" placeholder="आप क्या साझा करना चाहते हैं?"></textarea><button id="publish">पोस्ट प्रकाशित करें</button></section>
+    <section id="profile" class="card hidden"><h2>मेरी प्रोफाइल</h2><p id="profileName"></p><p id="profileCommunity" class="pill"></p><p class="muted">यह शुरुआती डेमो प्रोफाइल इसी डिवाइस के ब्राउज़र में सेव होती है।</p><button class="secondary" id="logout">इस डिवाइस से प्रोफाइल हटाएँ</button></section>
+  </section>
+  <p class="notice">यह MANVEXA का शुरुआती डेमो है। अभी अकाउंट और पोस्ट केवल इसी ब्राउज़र/डिवाइस में सेव होते हैं। असली सार्वजनिक ऐप के लिए सुरक्षित सर्वर, डेटाबेस, पासवर्ड सुरक्षा और रिपोर्ट/ब्लॉक सिस्टम जोड़ना होगा।</p>
+</main>
+<footer>MANVEXA © 2026 · Respect • Safety • Growth</footer>
+<script>
+const $=id=>document.getElementById(id);
+let user=JSON.parse(localStorage.getItem('manvexa_user')||'null');
+let posts=JSON.parse(localStorage.getItem('manvexa_posts')||'[]');
+function showApp(){ $('welcome').classList.add('hidden');$('app').classList.remove('hidden');$('profileName').textContent='नाम: '+user.name;$('profileCommunity').textContent=user.community;renderPosts();}
+function renderPosts(){ $('posts').innerHTML=''; if(!posts.length){$('posts').innerHTML='<p class="muted">अभी कोई पोस्ट नहीं है। पहली पोस्ट आप लिख सकते हैं।</p>';return;} [...posts].reverse().forEach(p=>{let d=document.createElement('div');d.className='post';let s=document.createElement('strong');s.textContent=p.name+' · '+p.community;let t=document.createElement('div');t.textContent=p.text;let time=document.createElement('div');time.className='muted';time.textContent=p.time;d.append(s,t,time);$('posts').append(d);});}
+if(user)showApp();
+$('join').onclick=()=>{let name=$('name').value.trim();if(!name){alert('कृपया अपना नाम लिखें।');return;}user={name,community:$('community').value};localStorage.setItem('manvexa_user',JSON.stringify(user));showApp();};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{['feed','create','profile'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));});
+$('publish').onclick=()=>{let text=$('postText').value.trim();if(!text){alert('पहले पोस्ट लिखें।');return;}posts.push({name:user.name,community:user.community,text,time:new Date().toLocaleString('hi-IN')});localStorage.setItem('manvexa_posts',JSON.stringify(posts));$('postText').value='';$('feed').classList.remove('hidden');$('create').classList.add('hidden');$('profile').classList.add('hidden');renderPosts();};
+$('logout').onclick=()=>{if(confirm('क्या आप इस डिवाइस से अपनी प्रोफाइल हटाना चाहते हैं?')){localStorage.removeItem('manvexa_user');user=null;$('app').classList.add('hidden');$('welcome').classList.remove('hidden');}};
+</script>
+</body>
+</html>
