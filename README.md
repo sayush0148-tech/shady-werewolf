@@ -83,4 +83,6 @@ MANVEXA is a beginner-friendly Python project designed to make student record ma
 
 MANVEXA – Making Student Management Simple and Smart!
 "Add using instructions "
+How to Run
+main.py
 
