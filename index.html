@@ -58,3 +58,29 @@ $('logout').onclick=()=>{if(confirm('क्या आप इस डिवाइ�
 </script>
 </body>
 </html>
+<!-- MANVEXA AI CHATBOX -->
+<div id="chatBtn" style="position:fixed;bottom:20px;right:20px;background:#6c5ce7;color:white;padding:15px 20px;border-radius:50px;cursor:pointer;z-index:9999;font-weight:bold;">💬 Manvexa AI</div>
+
+<div id="chatBox" style="display:none;position:fixed;bottom:80px;right:20px;width:300px;height:400px;background:white;border-radius:15px;box-shadow:0 0 20px #0003;z-index:9999;flex-direction:column;overflow:hidden;">
+  <div style="background:#6c5ce7;color:white;padding:12px;font-weight:bold;">Manvexa AI 🤖 <span onclick="document.getElementById('chatBox').style.display='none'" style="float:right;cursor:pointer;">X</span></div>
+  <div id="msgs" style="flex:1;padding:10px;overflow-y:auto;color:black;font-size:14px;"></div>
+  <div style="display:flex;padding:8px;">
+    <input id="inp" placeholder="Kuch pucho..." style="flex:1;padding:8px;border:1px solid #ddd;border-radius:8px;color:black;">
+    <button onclick="sendMsg()" style="background:#6c5ce7;color:white;border:none;padding:8px 12px;border-radius:8px;margin-left:5px;">Send</button>
+  </div>
+</div>
+
+<script>
+document.getElementById('chatBtn').onclick = function(){ let b=document.getElementById('chatBox'); b.style.display = b.style.display=='none'?'flex':'none'; }
+function sendMsg(){
+  let i=document.getElementById('inp'); let t=i.value; if(!t) return;
+  let m=document.getElementById('msgs');
+  m.innerHTML += '<div><b>Tum:</b> '+t+'</div>';
+  let reply = 'Manvexa me welcome! Main tumhari help kar sakta hu. 😊';
+  if(t.toLowerCase().includes('hi')||t.toLowerCase().includes('hello')) reply='Hi bhai! Kaise ho? Manvexa me kya karna hai?';
+  if(t.toLowerCase().includes('name')||t.toLowerCase().includes('naam')) reply='Mera naam Manvexa AI hai, Ayush ne banaya hai!';
+  if(t.toLowerCase().includes('intern')) reply='Ayush ko 2027 tak Internship chahiye, is project ko star karo!';
+  setTimeout(()=>{ m.innerHTML += '<div><b>Manvexa AI:</b> '+reply+'</div>'; m.scrollTop=9999; },500);
+  i.value=''; m.scrollTop=9999;
+}
+</script>
