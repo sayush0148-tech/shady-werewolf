@@ -84,3 +84,90 @@ function sendMsg(){
   i.value=''; m.scrollTop=9999;
 }
 </script>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANVEXA EARN - Sab Kamayenge</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+  body{background:#0f0f0f;color:white;padding:15px}
+  .top{background:linear-gradient(45deg,#FFD700,#FF8C00);color:black;padding:20px;border-radius:15px;text-align:center}
+  .top h1{font-size:28px}
+  .balance{background:#1a1a1a;border:2px solid #FFD700;padding:20px;border-radius:15px;margin-top:15px;text-align:center}
+  .balance h2{font-size:40px;color:#FFD700}
+  .card{background:#1a1a1a;padding:15px;border-radius:12px;margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+  .card b{font-size:16px}
+  .card span{font-size:12px;color:#aaa}
+  button{background:#FFD700;border:none;padding:10px 18px;border-radius:20px;font-weight:bold;cursor:pointer;color:black}
+  .refer{background:#222;border:2px dashed #FFD700;padding:15px;border-radius:12px;margin-top:15px;text-align:center}
+  input{width:100%;padding:12px;border-radius:8px;border:none;margin-top:10px;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <h1>MANVEXA EARN 💰</h1>
+  <p>Tu bhi kama, Dost bhi kamaye</p>
+</div>
+
+<div class="balance">
+  <p>Tera Balance</p>
+  <h2>₹ <span id="bal">0</span></h2>
+  <p id="msg">Roz Task karke kamao</p>
+  <br>
+  <button onclick="withdraw()">Withdraw Karo</button>
+</div>
+
+<h3 style="margin-top:20px">🔥 Aaj ke Tasks - Paisa Kamao</h3>
+
+<div class="card">
+  <div><b>1. App Download Karo</b><br><span>2 Min ka kaam</span></div>
+  <button onclick="earn(20,'App Download Done! +₹20')">₹20 Kamao</button>
+</div>
+
+<div class="card">
+  <div><b>2. Video Dekho (30 Sec)</b><br><span>Ads dekhna hai</span></div>
+  <button onclick="earn(10,'Video Dekha! +₹10')">₹10 Kamao</button>
+</div>
+
+<div class="card">
+  <div><b>3. MANVEXA pe Post Karo</b><br><span>Apni photo / soch share karo</span></div>
+  <button onclick="earn(15,'Post Kiya! +₹15')">₹15 Kamao</button>
+</div>
+
+<div class="refer">
+  <h3>👫 Refer & Earn - Sabse Zyada Paisa Yahi Hai</h3>
+  <p style="font-size:13px;margin-top:5px">Apna link dost ko bhejo, wo join karega to tujhe ₹30 milega, usko bhi ₹30 milega.</p>
+  <input id="link" readonly value="https://manvexa.com/join?ref=AYUSH123">
+  <br><br>
+  <button onclick="copyLink()">Link Copy Karo</button>
+  <button onclick="earn(30,'Dost Join Hua! +₹30')" style="background:white">Demo: Dost Join Hua</button>
+</div>
+
+<p style="text-align:center;font-size:11px;color:#777;margin-top:20px">Note: Ye Demo hai. Asli paisa ke liye Ads + Sponsor lagenge. Kisi se paisa mat lena, sirf task karwao.</p>
+
+<script>
+let bal = Number(localStorage.getItem('manvexa_bal') || 0);
+function showBal(){ document.getElementById('bal').innerText = bal; }
+showBal();
+function earn(amount, message){
+  bal += amount;
+  localStorage.setItem('manvexa_bal', bal);
+  showBal();
+  document.getElementById('msg').innerText = message;
+  alert(message);
+}
+function withdraw(){
+  if(bal < 100){ alert('Minimum ₹100 hone par Withdraw hoga. Abhi Balance: ₹'+bal); }
+  else { alert('Withdraw Request Bhej Di! 24 Ghante me paisa aayega.'); }
+}
+function copyLink(){
+  let l = document.getElementById('link');
+  l.select(); document.execCommand('copy');
+  alert('Link Copy Ho Gaya! Ab WhatsApp pe bhejo.');
+}
+</script>
+</body>
+</html>
