@@ -55,7 +55,81 @@ $('join').onclick=()=>{let name=$('name').value.trim();if(!name){alert('कृ�
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{['feed','create','profile'].forEach(id=>$(id).classList.toggle('hidden',id!==b.dataset.tab));});
 $('publish').onclick=()=>{let text=$('postText').value.trim();if(!text){alert('पहले पोस्ट लिखें।');return;}posts.push({name:user.name,community:user.community,text,time:new Date().toLocaleString('hi-IN')});localStorage.setItem('manvexa_posts',JSON.stringify(posts));$('postText').value='';$('feed').classList.remove('hidden');$('create').classList.add('hidden');$('profile').classList.add('hidden');renderPosts();};
 $('logout').onclick=()=>{if(confirm('क्या आप इस डिवाइस से अपनी प्रोफाइल हटाना चाहते हैं?')){localStorage.removeItem('manvexa_user');user=null;$('app').classList.add('hidden');$('welcome').classList.remove('hidden');}};
+</script
 </script>
+
+<!-- YAHAN CHATBOT CODE ADD KAREN -->
+
+</body>
+</html 
+<!-- MANVEXA AI CHATBOT -->
+<div id="chatBtn" style="position:fixed;bottom:20px;right:20px;background:#6c5ce7;color:white;padding:15px 20px;border-radius:50px;cursor:pointer;z-index:9999;">
+💬 Manvexa AI
+</div>
+
+<div id="chatBox" style="display:none;position:fixed;bottom:80px;right:20px;width:300px;height:400px;background:white;border-radius:15px;box-shadow:0 0 20px #0003;z-index:9999;flex-direction:column;overflow:hidden;">
+  <div style="background:#6c5ce7;color:white;padding:12px;">
+    Manvexa AI 🤖
+    <span id="closeChat" style="float:right;cursor:pointer;">X</span>
+  </div>
+  <div id="msgs" style="flex:1;padding:10px;overflow-y:auto;color:black;font-size:14px;"></div>
+  <div style="display:flex;padding:8px;">
+    <input id="inp" placeholder="Kuch pucho..." style="flex:1;padding:8px;color:black;">
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+const chatBtn = document.getElementById('chatBtn');
+const chatBox = document.getElementById('chatBox');
+const msgs = document.getElementById('msgs');
+const inp = document.getElementById('inp');
+
+chatBtn.onclick = () => {
+  chatBox.style.display =
+    chatBox.style.display === 'none' ? 'flex' : 'none';
+};
+
+document.getElementById('closeChat').onclick = () => {
+  chatBox.style.display = 'none';
+};
+
+function sendMsg() {
+  const t = inp.value.trim();
+  if (!t) return;
+
+  const userMsg = document.createElement('div');
+  userMsg.textContent = 'Tum: ' + t;
+  msgs.appendChild(userMsg);
+
+  let reply = 'Manvexa mein welcome! Main tumhari help kar sakta hoon. 😊';
+
+  if (/hi|hello/i.test(t)) {
+    reply = 'Hi bhai! Manvexa mein kya karna hai?';
+  } else if (/name|naam/i.test(t)) {
+    reply = 'Mera naam Manvexa AI hai!';
+  } else if (/intern/i.test(t)) {
+    reply = 'Welcome! Main internship information mein help kar sakta hoon.';
+  }
+
+  setTimeout(() => {
+    const botMsg = document.createElement('div');
+    botMsg.textContent = 'Manvexa AI: ' + reply;
+    msgs.appendChild(botMsg);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 400);
+
+  inp.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+document.getElementById('sendBtn').onclick = sendMsg;
+inp.addEventListener('keydown', e => {
+  if (e.key === 'Enter') sendMsg();
+});
+</script>
+
+  >
 </body>
 </html>
 <!-- MANVEXA AI CHATBOX -->
