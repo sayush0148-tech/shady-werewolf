@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d1b">
+<meta name="description" content="MANVEXA - Connect People. Create Change.">
+<title>MANVEXA | Connect People. Create Change.</title>
+
+<style>
+:root {
+  --bg:#080d1b;
+  --card:#111a2d;
+  --accent:#8b7cff;
+  --cyan:#45d9e8;
+  --text:#f5f7ff;
+  --muted:#a5b0c5;
+  --border:#ffffff19;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font:inherit}
+.container{width:90%;max-width:1100px;margin:auto}
+header{
+  position:sticky;top:0;z-index:10;
+  background:#080d1bf2;border-bottom:1px solid var(--border)
+}
+nav{
+  min-height:70px;display:flex;
+  justify-content:space-between;align-items:center
+}
+.logo{
+  font-size:25px;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(90deg,var(--accent),var(--cyan));
+  color:transparent;background-clip:text
+}
+.nav-links{display:flex;gap:25px;align-items:center}
+.nav-links a{color:var(--muted);font-size:14px}
+.nav-links a:hover{color:var(--cyan)}
+.menu{display:none;background:none;border:0;color:white;font-size:25px}
+.btn{
+  display:inline-block;padding:12px 23px;border:0;
+  border-radius:9px;color:white;font-weight:bold;
+  background:linear-gradient(110deg,var(--accent),#5867ef)
+}
+.outline{background:transparent;border:1px solid var(--border)}
+.hero{
+  min-height:570px;display:grid;place-items:center;
+  text-align:center;padding:80px 15px;
+  background:radial-gradient(ellipse at 50% 20%,#5146a044,transparent 65%)
+}
+.tag{
+  display:inline-block;padding:6px 15px;border-radius:30px;
+  border:1px solid #8b7cff66;color:var(--cyan);
+  font-size:13px;margin-bottom:20px
+}
+h1{font-size:clamp(42px,8vw,75px);line-height:1.1}
+.gradient{
+  background:linear-gradient(90deg,#9b8cff,var(--cyan));
+  color:transparent;background-clip:text
+}
+.hero p,.section-title p{color:var(--muted);margin:22px auto}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+section{padding:75px 0}
+.section-title{text-align:center;margin-bottom:40px}
+.section-title h2{font-size:35px}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:35px;align-items:center
+}
+.about-grid p{color:var(--muted);margin:15px 0}
+.panel,.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:17px;padding:25px
+}
+.feature{margin:18px 0}
+.feature span{color:var(--cyan);margin-right:10px}
+.community{background:#0b1221}
+.cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px
+}
+.card{transition:.2s}
+.card:hover{transform:translateY(-5px);border-color:var(--accent)}
+.card .icon{font-size:30px}
+.card h3{margin:12px 0}
+.card p{color:var(--muted);font-size:14px}
+.ai-section{text-align:center}
+.chat{
+  max-width:650px;margin:25px auto;
+  background:var(--card);border:1px solid #8b7cff66;
+  border-radius:16px;overflow:hidden;text-align:left
+}
+.chat-head{
+  background:linear-gradient(110deg,var(--accent),#5867ef);
+  padding:15px;font-weight:bold
+}
+#messages{
+  height:270px;overflow-y:auto;padding:15px;
+  display:flex;flex-direction:column;gap:12px
+}
+.msg{
+  max-width:85%;padding:11px 14px;border-radius:12px;
+  background:#202447;overflow-wrap:anywhere;font-size:14px
+}
+.user{align-self:flex-end;background:#51428e}
+.ai{align-self:flex-start}
+.quick{
+  display:flex;gap:8px;flex-wrap:wrap;padding:10px;
+  background:#111a2d
+}
+.quick button{
+  background:#202447;color:white;border:1px solid var(--border);
+  border-radius:20px;padding:6px 12px
+}
+.chat-input{
+  display:flex;gap:8px;padding:12px;
+  background:#111a2d;border-top:1px solid var(--border)
+}
+.chat-input input{
+  flex:1;min-width:0;background:#080d1b;
+  color:white;border:1px solid var(--border);
+  border-radius:9px;padding:12px
+}
+.chat-input button{
+  background:var(--accent);color:white;border:0;
+  border-radius:9px;padding:10px 16px
+}
+.cta{
+  text-align:center;padding:55px 20px;
+  background:linear-gradient(120deg,#27245a,#102e43);
+  border-radius:20px
+}
+.cta p{color:#c4cee1;margin:15px 0 25px}
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 0;color:var(--muted);font-size:13px
+}
+.footer{
+  display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:15px;align-items:center
+}
+.footer-links{display:flex;gap:18px}
+@media(max-width:760px){
+  .menu{display:block}
+  .nav-links{
+    display:none;position:absolute;top:70px;left:0;right:0;
+    padding:22px;background:#10182a;flex-direction:column
+  }
+  .nav-links.active{display:flex;align-items:flex-start}
+  .about-grid,.cards{grid-template-columns:1fr}
+  section{padding:55px 0}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="container">
+  <nav>
+   <a href="#home" class="logo">MANVEXA.</a>
+   <button class="menu" id="menuBtn" aria-label="Menu">☰</button>
+   <div class="nav-links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#community">Community</a>
+    <a href="#ai">Manvexa AI</a>
+    <a href="#contact" class="btn">Get Started</a>
+   </div>
+  </nav>
+ </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+ <div class="container">
+  <span class="tag">A New Digital Experience</span>
+  <h1>Connect People.<br><span class="gradient">Create Change.</span></h1>
+  <p>
+   Welcome to MANVEXA — a platform for community,
+   knowledge, creativity and personal growth.
+  </p>
+  <div class="actions">
+   <a href="#community" class="btn">Explore Community →</a>
+   <a href="#about" class="btn outline">Discover MANVEXA</a>
+  </div>
+ </div>
+</section>
+
+<section id="about">
+ <div class="container about-grid">
+  <div>
+   <span class="tag">OUR VISION</span>
+   <h2>Technology with a <span class="gradient">Purpose.</span></h2>
+   <p>
+    MANVEXA aims to connect people, ideas and opportunities
+    through a modern digital platform.
+   </p>
+   <p>
+    Learn, connect, collaborate and grow together.
+   </p>
+   <a href="#community" class="btn">Explore Platform</a>
+  </div>
+  <div class="panel">
+   <div class="feature"><span>✦</span><b>Innovation</b><p>Better digital experiences.</p></div>
+   <div class="feature"><span>◎</span><b>Connection</b><p>Bringing communities together.</p></div>
+   <div class="feature"><span>↗</span><b>Growth</b><p>Learning and collaboration.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="community" id="community">
+ <div class="container">
+  <div class="section-title">
+   <span class="tag">EXPLORE MANVEXA</span>
+   <h2>One Platform. <span class="gradient">Many Possibilities.</span></h2>
+   <p>Discover what we are building.</p>
+  </div>
+  <div class="cards">
+   <article class="card">
+    <div class="icon">🌐</div>
+    <h3>Community</h3>
+    <p>Share ideas, connect and collaborate.</p>
+   </article>
+   <article class="card">
+    <div class="icon">👤</div>
+    <h3>User Profiles</h3>
+    <p>Represent your interests and digital identity.</p>
+   </article>
+   <article class="card">
+    <div class="icon">🚀</div>
+    <h3>Opportunities</h3>
+    <p>Explore learning and growth opportunities.</p>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section class="ai-section" id="ai">
+ <div class="container">
+  <span class="tag">INTELLIGENT ASSISTANT</span>
+  <h2>Meet <span class="gradient">Manvexa AI</span></h2>
+  <p style="color:var(--muted)">Your digital learning companion.</p>
+
+  <div class="chat">
+   <div class="chat-head">🤖 MANVEXA AI</div>
+   <div id="messages" aria-live="polite">
+    <div class="msg ai">
+     Hello Boss! मैं MANVEXA AI हूँ।
+     HTML, CSS, Python और DSA के बारे में पूछो।
+    </div>
+   </div>
+   <div class="quick">
+    <button data-question="HTML kya hai?">HTML</button>
+    <button data-question="CSS kya hai?">CSS</button>
+    <button data-question="Python kya hai?">Python</button>
+    <button data-question="DSA kya hai?">DSA</button>
+   </div>
+   <div class="chat-input">
+    <input id="message" placeholder="Kuch puchho..." aria-label="Message">
+    <button id="send">Send</button>
+   </div>
+  </div>
+  <span class="tag">Demo AI — Secure API Integration Coming Soon</span>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="container">
+  <div class="cta">
+   <h2>Let's Build the <span class="gradient">Future.</span></h2>
+   <p>Every great platform starts with an idea. Join the journey.</p>
+   <a href="#home" class="btn">Explore MANVEXA →</a>
+  </div>
+ </div>
+</section>
+
+</main>
+
+<footer>
+ <div class="container footer">
+  <div><a href="#home" class="logo">MANVEXA.</a><p>Connect People. Create Change.</p></div>
+  <div class="footer-links">
+   <a href="#home">Home</a>
+   <a href="#about">About</a>
+   <a href="#community">Community</a>
+  </div>
+  <p>© <span id="year"></span> MANVEXA. All rights reserved.</p>
+ </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// MOBILE MENU
+$("menuBtn").addEventListener("click", () => {
+  $("navLinks").classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () =>
+    $("navLinks").classList.remove("active")
+  );
+});
+
+// AI CHAT
+function reply(text) {
+  const m = text.toLowerCase();
+
+  if (/hello|hi|namaste/.test(m))
+    return "Hello Boss! Aaj kya seekhna hai?";
+  if (m.includes("html"))
+    return "HTML website ka structure banata hai.";
+  if (m.includes("css"))
+    return "CSS website ko design aur styling deta hai.";
+  if (m.includes("python"))
+    return "Python ek programming language hai jo AI aur automation mein use hoti hai.";
+  if (m.includes("javascript") || m === "js")
+    return "JavaScript website mein functionality add karta hai.";
+  if (m.includes("dsa"))
+    return "DSA ka matlab Data Structures and Algorithms hai.";
+  if (m.includes("manvexa"))
+    return "MANVEXA ek digital platform hai. Connect People. Create Change.";
+  if (m.includes("earn") || m.includes("paisa"))
+    return "Coding skills se real projects banao aur professional services offer karo.";
+  if (m.includes("help"))
+    return "Main HTML, CSS, Python aur DSA ke basic questions mein help kar sakta hoon.";
+  if (m.includes("thank"))
+    return "You're welcome Boss! Keep learning and growing.";
+
+  return "Achha sawal hai Boss! Abhi main basic questions ka jawab de sakta hoon.";
+}
+
+function addMessage(text, sender) {
+  const bubble = document.createElement("div");
+  bubble.className = "msg " + sender;
+  bubble.textContent = text;
+  $("messages").appendChild(bubble);
+  $("messages").scrollTop = $("messages").scrollHeight;
+}
+
+function sendMessage(value) {
+  const input = $("message");
+  const text = (value || input.value).trim();
+  if (!text) return;
+
+  addMessage(text, "user");
+  input.value = "";
+
+  setTimeout(() => addMessage(reply(text), "ai"), 250);
+}
+
+$("send").addEventListener("click", () => sendMessage());
+
+$("message").addEventListener("keydown", e => {
+  if (e.key === "Enter") sendMessage();
+});
+
+document.querySelectorAll("[data-question]").forEach(button => {
+  button.addEventListener("click", () =>
+    sendMessage(button.dataset.question)
+  );
+});
+
+$("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
