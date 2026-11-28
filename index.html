@@ -9,6 +9,179 @@
 <title>MANVEXA | Connect People. Create Change.</title>
 
 <style>
+
+function manvexaAddMessage(message, sender) {
+  const chat = document.getElementById("manvexa-messages");
+  const bubble = document.createElement("div");
+
+  bubble.className = "mv-msg " + sender;
+
+  const label = document.createElement("b");
+  label.textContent = sender === "mv-user"
+    ? "You: "
+    : "MANVEXA AI: ";
+
+  bubble.appendChild(label);
+  bubble.appendChild(document.createElement("br"));
+
+  const content = document.createElement("span");
+  content.textContent = message;
+
+  bubble.appendChild(content);
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function manvexaReply(message) {
+  const m = message.toLowerCase();
+
+  if (m.includes("hello") || m.includes("hi") ||
+      m.includes("namaste")) {
+    return "Hello Boss! Aaj kya seekhna hai?";
+  }
+
+  if (m.includes("html")) {
+    return "HTML website ka structure banata hai.";
+  }
+
+  if (m.includes("css")) {
+    return "CSS website ko design aur styling deta hai.";
+  }
+
+  if (m.includes("javascript") || m.includes("js")) {
+    return "JavaScript website mein functionality add karta hai.";
+  }
+
+  if (m.includes("python")) {
+    return "Python ek programming language hai jo AI aur automation mein use hoti hai.";
+  }
+
+  if (m.includes("dsa")) {
+    return "DSA ka matlab Data Structures and Algorithms hai.";
+  }
+
+  if (m.includes("paisa") || m.includes("earn")) {
+    return "Apni coding skills se real projects banao aur clients ko professional services offer karo.";
+  }
+
+  if (m.includes("manvexa")) {
+    return "MANVEXA ek digital platform hai. Connect People. Create Change.";
+  }
+
+  return "Achha sawal hai Boss! Abhi main basic questions ka jawab de sakta hoon. HTML, CSS, Python ya DSA poochho.";
+}
+
+function manvexaSend() {
+  const input = document.getElementById("manvexa-message");
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  manvexaAddMessage(message, "mv-user");
+  input.value = "";
+
+  const reply = manvexaReply(message);
+  manvexaAddMessage(reply, "mv-ai");
+}
+
+function manvexaQuick(question) {
+  document.getElementById("manvexa-message").value = question;
+  manvexaSend();
+}
+
+document.getElementById("manvexa-send")
+  .addEventListener("click", manvexaSend);
+
+document.getElementById("manvexa-message")
+  .addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      manvexaSend();
+    }
+  });
+
+
+/* MANVEXA AI CHATBOX */
+#manvexa-chat {
+  margin: 25px auto 0;
+  max-width: 550px;
+  text-align: left;
+  background: #080d1b;
+  border: 1px solid #8b7cff66;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+#manvexa-messages {
+  height: 300px;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mv-msg {
+  max-width: 85%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.mv-user {
+  align-self: flex-end;
+  background: #8b7cff;
+  color: white;
+}
+
+.mv-ai {
+  align-self: flex-start;
+  background: #202447;
+  color: white;
+}
+
+#manvexa-chat-input {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: #111a2d;
+}
+
+#manvexa-message {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ffffff22;
+  background: #080d1b;
+  color: white;
+}
+
+#manvexa-send {
+  padding: 10px 17px;
+  border: 0;
+  border-radius: 10px;
+  background: #8b7cff;
+  color: white;
+  font-weight: bold;
+}
+
+#manvexa-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 12px 12px;
+  background: #111a2d;
+}
+
+#manvexa-quick button {
+  padding: 7px 12px;
+  border: 1px solid #ffffff22;
+  border-radius: 20px;
+  background: #202447;
+  color: white;
+}
+
 :root {
   --bg: #080d1b;
   --surface: #111a2d;
@@ -543,7 +716,36 @@ footer {
 <section id="contact">
   <div class="container">
     <div class="cta">
-      <span class="tag">BE PART OF SOMETHING NEW</span>
+      
+<div id="manvexa-chat">
+
+  <div id="manvexa-messages" aria-live="polite">
+    <div class="mv-msg mv-ai">
+      <b>MANVEXA AI:</b><br>
+      Hello Boss! मैं MANVEXA AI हूँ।
+      मुझसे HTML, CSS, Python और DSA के बारे में पूछो।
+    </div>
+  </div>
+
+  <div id="manvexa-quick">
+    <button type="button" onclick="manvexaQuick('HTML kya hai?')">HTML</button>
+    <button type="button" onclick="manvexaQuick('CSS kya hai?')">CSS</button>
+    <button type="button" onclick="manvexaQuick('Python kya hai?')">Python</button>
+    <button type="button" onclick="manvexaQuick('DSA kya hai?')">DSA</button>
+  </div>
+
+  <div id="manvexa-chat-input">
+    <input
+      id="manvexa-message"
+      type="text"
+      placeholder="Kuch puchho..."
+      aria-label="Apna sawal likho"
+    >
+    <button id="manvexa-send" type="button">Send</button>
+  </div>
+
+</div>
+
       <h2>Let's Build the <span class="gradient-text">Future.</span></h2>
       <p>
         Every great platform starts with an idea.
